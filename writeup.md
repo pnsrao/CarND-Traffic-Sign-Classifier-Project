@@ -12,14 +12,13 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+[image1]: ./output_images/barchart.png "Visualization"
+[image2]: ./output_images/grayscale.png "Grayscaling"
+[image3]: ./output_images/gtraffic1.jpg "Traffic Sign 1"
+[image4]: ./output_images/gtraffic2.jpg "Traffic Sign 2"
+[image5]: ./output_images/gtraffic3.jpg "Traffic Sign 3"
+[image6]: ./output_images/gtraffic4.jpg "Traffic Sign 4"
+[image7]: ./output_images/gtraffic5.jpg "Traffic Sign 5"
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -43,18 +42,18 @@ signs data set:
 #### 1. Include an exploratory visualization of the dataset.
 
 Here is an exploratory visualization of the data set. It consists of bar charts showing how the data is distributed among the various classes. It is noted that the distribution is not even and that there are some classes with few examples.
-[Histogram][./output_images/barchart.png] of classes among the training, validation and test examples
+![alt text][image1] 
 * Comments
-** Distribution of signs among training, test and validation seem roughly similar
-** Label 38 (keep right) occurs more frequently than Label 39 (keep left)
-** 30, 50, 70, 80 occurs more frequently than 20 and 60 kmph, and end of speed limit sign
+  * Distribution of signs among training, test and validation seem roughly similar
+  * Label 38 (keep right) occurs more frequently than Label 39 (keep left)
+  * 30, 50, 70, 80 occurs more frequently than 20 and 60 kmph, and end of speed limit sign
 
 Sample images are displayed in the project notebook and the following is observed
 * Comments
-** Images don't appear to be clean. For the pixel sizes, they appear to be blurry
-** Some dark images imply that the data set  has not been pruned.
-** Signs have color patterns. However the lighting conditions vary drastically. (H,S,V) mapping usually deals with lighting variations to some extent. But in this case, the conditions vary between extereley bright and extremely dark. Grayscale appears to be a better bet even if the color information is lost.
-** Converting to grayscale also seems to accentuate the pixel differences in darker images as seen below.
+  * Images don't appear to be clean. For the pixel sizes, they appear to be blurry
+  * Some dark images imply that the data set  has not been pruned.
+  * Signs have color patterns. However the lighting conditions vary drastically. (H,S,V) mapping usually deals with lighting variations to some extent. But in this case, the conditions vary between extereley bright and extremely dark. Grayscale appears to be a better bet even if the color information is lost.
+  * Converting to grayscale also seems to accentuate the pixel differences in darker images as seen below.
 
 ### Design and Test a Model Architecture
 
@@ -62,7 +61,7 @@ Sample images are displayed in the project notebook and the following is observe
 
 Converting to grayscale helped in accentuating th epixel differences in darker images. Here is an example of a traffic sign image before and after grayscaling.
 
-![Grayscale example][./output_images/grayscale.png]
+![alt text][image2]
 
 As a last step, I normalized the image data because relative differences in pixel values are more important to discern shaped, not the absolute values. 
  
@@ -108,10 +107,13 @@ My final model results were:
 
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic signs that I found on the web:
+Here are five German traffic signs that I found on the web. These are cropped and resized to 32x32 images as neede dby th einput to the model.
 
-![30kmph speed limit](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpWpIjjBsyfYPpUMSX19SJWO64hcTL8N9yoZlulTRQwQ0YWoRFBg) ![Slippery road](http://media.gettyimages.com/vectors/slippery-road-risk-of-ice-german-warning-sign-vector-id180585671?s=170667a) ![Bumpy road](http://storage.torontosun.com/v1/blogs-prod-photos/e/4/3/8/0/e43800d91b0c525906f0fbfb93f5b527.jpg?stmp=1290377910) 
-![Children crossing](http://www.gettyimages.com/detail/photo/german-traffic-signs-royalty-free-image/465921901?esource=SEO_GIS_CDN_Redirect) ![Keep Right](http://media.gettyimages.com/photos/german-traffic-signs-picture-id459380917?s=170667a)
+![30kmph speed limit][image3] ![Slippery road][image4] ![Bumpy road][image5] 
+![Children crossing][image6] ![Keep Right][image7]
+
+Web links for the original images are as follows (as of 8/27/2017). 
+[30kmph limit](https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpWpIjjBsyfYPpUMSX19SJWO64hcTL8N9yoZlulTRQwQ0YWoRFBg), [Slippery Road](http://media.gettyimages.com/vectors/slippery-road-risk-of-ice-german-warning-sign-vector-id180585671?s=170667a), [Bumpy road](http://storage.torontosun.com/v1/blogs-prod-photos/e/4/3/8/0/e43800d91b0c525906f0fbfb93f5b527.jpg?stmp=1290377910), [Children crossing](http://www.gettyimages.com/detail/photo/german-traffic-signs-royalty-free-image/465921901?esource=SEO_GIS_CDN_Redirect), [Keep Right](http://media.gettyimages.com/photos/german-traffic-signs-picture-id459380917?s=170667a).
 
 #### 2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. 
 
