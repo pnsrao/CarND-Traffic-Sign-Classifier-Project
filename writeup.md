@@ -21,7 +21,7 @@ The goals / steps of this project are the following:
 [image7]: ./output_images/gtraffic5.jpg "Traffic Sign 5"
 
 ## Rubric Points
-###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
+Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
 
 ---
 ### Writeup / README
@@ -45,7 +45,6 @@ Here is an exploratory visualization of the data set. It consists of bar charts 
 ![alt text][image1] 
 * Comments
   * Distribution of signs among training, test and validation seem roughly similar
-  * Label 38 (keep right) occurs more frequently than Label 39 (keep left)
   * 30, 50, 70, 80 occurs more frequently than 20 and 60 kmph, and end of speed limit sign
 
 Sample images are displayed in the project notebook and the following is observed
@@ -53,17 +52,17 @@ Sample images are displayed in the project notebook and the following is observe
   * Images don't appear to be clean. For the pixel sizes, they appear to be blurry
   * Some dark images imply that the data set  has not been pruned.
   * Signs have color patterns. However the lighting conditions vary drastically. (H,S,V) mapping usually deals with lighting variations to some extent. But in this case, the conditions vary between extereley bright and extremely dark. Grayscale appears to be a better bet even if the color information is lost.
-  * Converting to grayscale also seems to accentuate the pixel differences in darker images as seen below.
+  * Converting to grayscale also seems to accentuate the pixel differences in darker images as seen later.
 
 ### Design and Test a Model Architecture
 
 #### 1. Preprocessing steps consisted of conversion to grayscale and mean centering and normalization. 
 
-Converting to grayscale helped in accentuating th epixel differences in darker images. Here is an example of a traffic sign image before and after grayscaling.
+Converting to grayscale helped in accentuating the pixel differences in darker images. Here is an example of a traffic sign image before and after converting to grayscale.
 
 ![alt text][image2]
 
-As a last step, I normalized the image data because relative differences in pixel values are more important to discern shaped, not the absolute values. 
+As a last step, I normalized the image data because relative differences in pixel values are more important to discern shapes, not the absolute values. 
  
 #### 2. Describe what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) 
 
@@ -74,7 +73,7 @@ My final model consisted of the following layers, as in LeNet:
 | Input         		| 32x32x1 Grayscale image   							| 
 | Convolution 5x5     	| 1x1 stride, valid padding, outputs 28x28x6 	|
 | RELU					|												|
-| Max pooling	      	| 2x2 stride,  outputs 16x16x6 				|
+| Max pooling	      	| 2x2 stride,  outputs 14x14x6 				|
 | Convolution 5x5	    | 1x1 stride, valid padding, outputs 10x10x16      									|
 | RELU					|												|
 | Max pooling	      	| 2x2 stride,  outputs 5x5x16 				|
@@ -90,24 +89,24 @@ My final model consisted of the following layers, as in LeNet:
 
 #### 3. Describe how you trained your model.
 
-To train the model, I used an Adam optimizer with mean cross entropy losses between the softmax probablities and the one-hot encodd labels. The following parameters were used
+To train the model, I used an Adam optimizer with mean cross entropy losses between the softmax probablities and the one-hot encoded labels. The following parameters were used
 * Learning rate of 0.001
 * Batch size of 128
 * 10 EPOCHs
 
 #### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93.
-I started with the LeNet architecture as suggested and tried optimizing various parameters. The initial model was overfitting the data since the training losses were much smaller than teh validation losses. I tried both L2 regularization techniques and dropouts and finally settled onusing dropouts after the fully connected layers.
+I started with the suggested LeNet architecture and tried optimizing various parameters. The initial model was overfitting the data since the training losses were much smaller than the validation losses. I tried both L2 regularization techniques and dropouts and finally settled on using dropouts after the fully connected layers.
 
 My final model results were:
-* training set accuracy of 98%
+* training set accuracy of roughly 98%
 * validation set accuracy close to 94%
-* test set accuracy of just over 92%
+* test set accuracy of roughly 92%
 
 ### Test a Model on New Images
 
 #### 1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic signs that I found on the web. These are cropped and resized to 32x32 images as neede dby th einput to the model.
+Here are five German traffic signs that I found on the web. These are cropped and resized to 32x32 images as needed by the input to the model.
 
 ![30kmph speed limit][image3] ![Slippery road][image4] ![Bumpy road][image5] 
 ![Children crossing][image6] ![Keep Right][image7]
@@ -125,64 +124,63 @@ Here are the results of the prediction:
 | Slippery road     			| Slippery road										|
 | Bumpy road					| Bumpy road											|
 | Children crossing	      		| Children crossing					 				|
-| Keep Right			| 50kmph speed limit       							|
+| Keep Right			| 30kmph speed limit       							|
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 100%. While this is less than the test set accuracy of 92%, it is statistically consistent given that only 5 images are chosen and the results are within statistical bounds of the test set accuracy. It si noted, that in some other runs not recorded here, all 5 of the mages were chosen correctly
+The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. While this is less than the test set accuracy of 92%, it is statistically consistent given that only 5 images are chosen and the results are within statistical bounds of the test set accuracy. It is noted, that in some other runs not recorded here, all 5 of the mages were chosen correctly
 
 #### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability.
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
-
+The following data is obtained from the project notebook
 
  For image  0  True label =  1 Speed limit (30km/h) 
 
 | Probability | Prediction  |
 |:---------------------:|:---------------------------------------------:|
-|     99.75   | 1 Speed limit (30km/h) |
-|      0.13   | 2 Speed limit (50km/h) |
-|      0.12   | 0 Speed limit (20km/h) |
-|      0.00   | 4 Speed limit (70km/h) |
-|      0.00   | 5 Speed limit (80km/h) |
+|     97.52   | 1 Speed limit (30km/h) |
+|      2.16   | 0 Speed limit (20km/h) |
+|      0.27   | 4 Speed limit (70km/h) |
+|      0.05   | 5 Speed limit (80km/h) |
+|      0.01   | 2 Speed limit (50km/h) |
 
  For image  1  True label =  23 Slippery road 
 
 | Probability | Prediction  |
 |:---------------------:|:---------------------------------------------:|
-|     89.88   |23        Slippery road |
-|      3.50   |29    Bicycles crossing |
-|      2.66   |24 Road narrows on the right |
-|      2.13   |19 Dangerous curve to the left |
-|      1.00   |30   Beware of ice/snow |
+|     99.19   |23        Slippery road |
+|      0.68   |20 Dangerous curve to the right |
+|      0.08   |19 Dangerous curve to the left |
+|      0.06   |30   Beware of ice/snow |
+|      0.00   |24 Road narrows on the right |
 
  For image  2  True label =  22 Bumpy road 
 
 | Probability | Prediction  |
 |:---------------------:|:---------------------------------------------:|
-|     99.44   |22           Bumpy road |
-|      0.26   |29    Bicycles crossing |
-|      0.11   |25            Road work |
-|      0.09   |18      General caution |
-|      0.06   |26      Traffic signals |
+|     84.71   |22           Bumpy road |
+|      6.95   |29    Bicycles crossing |
+|      5.56   |28    Children crossing |
+|      1.74   |36 Go straight or right |
+|      0.40   |25            Road work |
 
  For image  3  True label =  28 Children crossing 
 
 | Probability | Prediction  |
 |:---------------------:|:---------------------------------------------:|
-|     99.97   |28    Children crossing |
-|      0.01   |19 Dangerous curve to the left |
-|      0.01   |20 Dangerous curve to the right |
-|      0.00   |23        Slippery road |
-|      0.00   |11 Right-of-way at the next intersection |
+|     85.88   |28    Children crossing |
+|      6.68   |24 Road narrows on the right |
+|      4.42   |29    Bicycles crossing |
+|      1.03   |20 Dangerous curve to the right |
+|      0.52   |23        Slippery road |
 
  For image  4  True label =  38 Keep right 
 
 | Probability | Prediction  |
 |:---------------------:|:---------------------------------------------:|
-|     90.74   | 2 Speed limit (50km/h) |
-|      9.26   | 1 Speed limit (30km/h) |
-|      0.00   |13                Yield |
-|      0.00   | 0 Speed limit (20km/h) |
-|      0.00   | 3 Speed limit (60km/h) |
+|     90.12   | 1 Speed limit (30km/h) |
+|      9.74   | 2 Speed limit (50km/h) |
+|      0.08   |19 Dangerous curve to the left |
+|      0.02   |31 Wild animals crossing |
+|      0.02   |39            Keep left |
 
-
+The first two predictions appear to be strong ones. The last three signs had relatively lower confidence. However only the "Keep Right" sign was classified incorrectly.
