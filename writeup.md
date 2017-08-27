@@ -26,7 +26,7 @@ Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/4
 ---
 ### Writeup / README
 
-You're reading it! and here is a link to my [project code](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb) and [html version](https://github.com/udacity/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.html) of the project code.
+You're reading it! and here is a link to my [project code](https://github.com/pnsrao/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.ipynb) and [html version](https://github.com/pnsrao/CarND-Traffic-Sign-Classifier-Project/blob/master/Traffic_Sign_Classifier.html) of the project code.
 
 ### Data Set Summary & Exploration
 
